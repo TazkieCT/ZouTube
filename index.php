@@ -1,17 +1,10 @@
 <?php
 $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-$maxFileSize = 2 * 1024 * 1024; // 2MB
+$maxFileSize = 200 * 1024 * 1024; // 200MB
 $uploadDir = 'uploads/';
-$copyDir = 'backups/'; 
-
-if (!file_exists($uploadDir)) {
-    mkdir($uploadDir, 0777, true);
-}
-if (!file_exists($copyDir)) {
-    mkdir($copyDir, 0777, true);
-}
 
 $uploadStatus = '';
+$isSuccess = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fileToUpload'])) {
     $file = $_FILES['fileToUpload'];
@@ -31,39 +24,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fileToUpload'])) {
         else {
             $destination = $uploadDir . basename($file['name']);
             if (move_uploaded_file($file['tmp_name'], $destination)) {
-                // Menyalin file ke folder backup
-                $copyPath = $copyDir . basename($file['name']);
-                if (copy($destination, $copyPath)) {
-                    $uploadStatus = 'File uploaded and copied successfully: ' . htmlspecialchars($file['name']) . 
-                                   ' (' . round($file['size'] / 1024, 2) . ' KB)<br>' .
-                                   'Original: ' . $destination . '<br>' .
-                                   'Copy: ' . $copyPath;
-                } else {
-                    $uploadStatus = 'File uploaded but failed to create copy: ' . htmlspecialchars($file['name']);
-                }
+                $uploadStatus = 'File uploaded successfully: ' . htmlspecialchars($file['name']) . 
+                               ' (' . round($file['size'] / 1024, 2) . ' KB)';
+                $isSuccess = true;
             } else {
                 $uploadStatus = 'Failed to move uploaded file.';
             }
         }
     }
 }
+
+if (!file_exists($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>File Upload with Validation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZouTube</title>
+    <style>
+        .success { color: green; }
+        .error { color: red; }
+    </style>
 </head>
 <body>
     <h2>Upload a File</h2>
     
     <?php if (!empty($uploadStatus)): ?>
-        <p style="color: <?php echo strpos($uploadStatus, 'successfully') !== false ? 'green' : 'red'; ?>">
+        <p class="<?php echo $isSuccess ? 'success' : 'error'; ?>">
             <?php echo $uploadStatus; ?>
         </p>
     <?php endif; ?>
     
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
+    <form action="index.php" method="post" enctype="multipart/form-data">
         <label for="fileToUpload">Select file to upload:</label>
         <input type="file" name="fileToUpload" id="fileToUpload" required>
         <br><br>
@@ -72,9 +68,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fileToUpload'])) {
     
     <h3>Upload Requirements:</h3>
     <ul>
-        <li>Maximum file size: <?php echo ($maxFileSize / (1024 * 1024)); ?> MB</li>
-        <li>Allowed file types: <?php echo implode(', ', $allowedTypes); ?></li>
-    </ul>
-</body>
-</html>
-
+        <li>Maximum file size:
