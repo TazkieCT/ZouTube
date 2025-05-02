@@ -23,7 +23,6 @@ button {
     background: none;
 }
 
-/* Header Styles */
 .header {
     display: flex;
     align-items: center;
@@ -162,7 +161,6 @@ button {
     cursor: pointer;
 }
 
-/* Main Content Styles */
 .main-content {
     display: flex;
     padding: 24px;
@@ -176,7 +174,6 @@ button {
     max-width: 1280px;
 }
 
-/* Video Player Styles */
 .video-player {
     position: relative;
     width: 100%;
@@ -206,7 +203,6 @@ button {
     pointer-events: none;
 }
 
-/* Video Controls */
 .video-controls {
     position: absolute;
     bottom: 0;
@@ -302,7 +298,6 @@ button {
     cursor: pointer;
 }
 
-/* Video Info Styles */
 .video-info {
     margin-bottom: 24px;
 }

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video - ZouTube</title>
+    <link rel="stylesheet" href="styles/upload.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="#" class="logo">
+                <svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                    <rect width="30" height="20" fill="#FF0000" rx="5" />
+                    <path d="M12 6L20 10L12 14V6Z" fill="white" />
+                </svg>
+                <span class="logo-text">ZouTube</span>
+            </a>
+        </div>
+        <div class="search-container">
+            <button class="search-button">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                </svg>
+            </button>
+            <input type="text" class="search-input" placeholder="Search">
+        </div>
+        <div class="header-right">
+            <div class="profile">
+                <div class="profile-avatar">Z</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="/dashboard.html">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
+                            </svg>
+                            <span>Content</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2zm-1-9H4v6h9V4zm-1 5H5V5h7v4zM20 4h-4v6h4V4zm-1 5h-2V5h2v4zm1 4h-9v6h9v-6zm-1 5h-7v-4h7v4z"></path>
+                            </svg>
+                            <span>Upload Video</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="upload-layout">
+            <main class="upload-form-content">
+                <div class="content-header">
+                    <h1>Upload Video</h1>
+                    <p class="subtitle">Post a video to your channel</p>
+                </div>
+
+                <div class="upload-content">
+                    <div class="upload-section">
+                        <div class="form-group">
+                            <label for="videoTitle">Title (required)</label>
+                            <input type="text" id="videoTitle" placeholder="Add a title that describes your video" maxlength="100">
+                            <div class="character-count"><span id="titleCount">0</span>/100</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="videoDescription">Description</label>
+                            <textarea id="videoDescription" placeholder="Tell viewers about your video" rows="6" maxlength="5000"></textarea>
+                            <div class="character-count"><span id="descCount">0</span>/5000</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thumbnail</label>
+                            <p class="thumbnail-help">Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention.</p>
+                            
+                            <div class="thumbnails-container" id="thumbnailsContainer">
+                                <div class="thumbnail-placeholder">
+                                    <svg viewBox="0 0 24 24" width="24" height="24">
+                                        <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                        <path d="M14.14 11.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"></path>
+                                    </svg>
+                                    <p>Upload your video to generate thumbnails</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Visibility</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="visibilityPublic" name="visibility" value="public" checked>
+                                    <label for="visibilityPublic">
+                                        <div class="radio-title">
+                                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
+                                            </svg>
+                                            Public
+                                        </div>
+                                        <div class="radio-description">Everyone can watch your video</div>
+                                    </label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="visibilityPrivate" name="visibility" value="private">
+                                    <label for="visibilityPrivate">
+                                        <div class="radio-title">
+                                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+                                            </svg>
+                                            Private
+                                        </div>
+                                        <div class="radio-description">Only you can watch your video</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upload-actions">
+                        <button class="action-button primary" id="publishButton" disabled>PUBLISH</button>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="upload-sidebar">
+                <div class="upload-sidebar-header">
+                    <h2>Upload video</h2>
+                </div>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-placeholder" id="uploadPlaceholder">
+                        <svg viewBox="0 0 24 24" width="48" height="48">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"></path>
+                        </svg>
+                        <p>Drag and drop video files to upload</p>
+                        <p class="upload-small">Your videos will be private until you publish them</p>
+                        <label for="fileInput" class="upload-button">SELECT FILES</label>
+                        <input type="file" id="fileInput" accept="video/*" style="display: none;">
+                    </div>
+                    <div class="video-preview-container" id="videoPreviewContainer" style="display: none;">
+                        <video id="videoPreview" controls></video>
+                        <div class="video-info">
+                            <div class="video-info-item">
+                                <span class="info-label">File name:</span>
+                                <span id="fileName" class="info-value"></span>
+                            </div>
+                            <div class="video-info-item">
+                                <span class="info-label">File size:</span>
+                                <span id="fileSize" class="info-value"></span>
+                            </div>
+                            <div class="video-info-item">
+                                <span class="info-label">Duration:</span>
+                                <span id="videoDuration" class="info-value"></span>
+                            </div>
+                        </div>
+                        <button class="change-video-button" id="changeVideoButton">CHANGE VIDEO</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="/js/upload.js"></script>
+</body>
+</html>
+
