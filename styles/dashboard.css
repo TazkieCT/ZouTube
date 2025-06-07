@@ -37,7 +37,7 @@ body {
 }
 
 .menu-toggle {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     width: 24px;
@@ -479,6 +479,10 @@ body {
 }
 
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
     .sidebar {
         position: fixed;
         top: 56px;
