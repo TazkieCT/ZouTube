@@ -2,6 +2,19 @@
 $errors = [];
 $videoData = null;
 
+function generateId() {
+    return random_int(1000, 9999) . time();
+}
+
+function getVideoDuration($filePath) {
+    if (!file_exists($filePath)) return 0;
+    
+    // Use ffprobe to get duration
+    $command = "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 " . escapeshellarg($filePath);
+    $duration = shell_exec($command);
+    return (int) round(floatval($duration));
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['videoTitle'] ?? '');
     if ($title === '') {
@@ -18,16 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $dir = __DIR__ . '/uploads/';
             if (!is_dir($dir)) mkdir($dir, 0755, true);
-            $name = time().'_'.basename($file['name']);
+            $name = time() . '_' . basename($file['name']);
             $path = $dir . $name;
             if (move_uploaded_file($file['tmp_name'], $path)) {
+                $duration = getVideoDuration($path);
                 $videoData = [
+                    'id' => generateId(),
                     'title' => htmlspecialchars($title),
                     'description' => htmlspecialchars($_POST['videoDescription'] ?? ''),
                     'visibility' => $_POST['visibility'] === 'public' ? 'public' : 'private',
                     'fileName' => htmlspecialchars($file['name']),
                     'filePath' => 'uploads/' . $name,
-                    'fileSize' => round($file['size'] / 1024 / 1024, 2).' MB',
+                    'fileSize' => round($file['size'] / 1024 / 1024, 2) . ' MB',
+                    'duration' => $duration
                 ];
 
                 $jsonFile = __DIR__ . '/video_data.json';
@@ -51,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <nav class="sidebar-nav">
                 <ul>
                     <li>
-                        <a href="/dashboard.html">
+                        <a href="/ZouTube/dashboard.php">
                             <svg viewBox="0 0 24 24" width="24" height="24">
                                 <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
                             </svg>
@@ -105,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </a>
                     </li>
                     <li class="active">
-                        <a href="#">
+                        <a href="/ZouTube/upload.php">
                             <svg viewBox="0 0 24 24" width="24" height="24">
                                 <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"></path>
                             </svg>

@@ -1,18 +1,22 @@
 [
     {
-        "title": "asdadsa",
-        "description": "sdasdada",
+        "id": 1,
+        "title": "Dummy Title",
+        "description": "Dummy description untuk apa kau tahu disini...",
         "visibility": "public",
         "fileName": "Cody Fry - 'The End' (Album Trailer).mp4",
-        "filePath": "uploads\/1750619345_Cody Fry - 'The End' (Album Trailer).mp4",
-        "fileSize": "5.92 MB"
+        "filePath": "uploads\/1751097744_Cody Fry - 'The End' (Album Trailer).mp4",
+        "fileSize": "5.92 MB",
+        "duration": 500
     },
     {
-        "title": "asda",
-        "description": "sdadsada",
+        "id": "34101751100298",
+        "title": "Upload sekali lagi",
+        "description": "The best album created ever, made by cody fry",
         "visibility": "public",
         "fileName": "Cody Fry - 'The End' (Album Trailer).mp4",
-        "filePath": "uploads\/1750619362_Cody Fry - 'The End' (Album Trailer).mp4",
-        "fileSize": "5.92 MB"
+        "filePath": "uploads\/1751100298_Cody Fry - 'The End' (Album Trailer).mp4",
+        "fileSize": "5.92 MB",
+        "duration": 0
     }
 ]
