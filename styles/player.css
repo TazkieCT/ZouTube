@@ -404,6 +404,18 @@ button {
     gap: 8px;
 }
 
+.card-link {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    gap: 8px;
+}
+.video-card-title,
+.video-card-channel {
+    color: #0f0f0f;
+}
+
+
 .thumbnail {
     position: relative;
     width: 168px;

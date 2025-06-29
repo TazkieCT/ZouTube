@@ -117,9 +117,6 @@ if (!$video) {
                 <h1 class="video-title"><?php echo htmlspecialchars($video['title']); ?></h1>
                 <div class="video-description">
                     <p><?php echo nl2br(htmlspecialchars($video['description'])); ?></p>
-                    <p><strong>Duration:</strong> <?php echo gmdate("i:s", $video['duration']); ?></p>
-                    <p><strong>File Size:</strong> <?php echo htmlspecialchars($video['fileSize']); ?></p>
-                    <p><strong>Visibility:</strong> <?php echo htmlspecialchars($video['visibility']); ?></p>
                 </div>
             </div>
         </div>
