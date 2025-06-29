@@ -28,12 +28,7 @@ if (!$video) {
 <body>
     <header class="header">
         <div class="header-left">
-            <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <a href="#" class="logo">
+            <a href="/ZouTube/home.php" class="logo">
                 <svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
                     <rect width="30" height="20" fill="#FF0000" rx="5" />
                     <path d="M12 6L20 10L12 14V6Z" fill="white" />
@@ -59,7 +54,7 @@ if (!$video) {
     <div class="main-content">
         <div class="video-container">
             <div class="video-player">
-                <video id="mainVideo" poster="">
+                <video id="mainVideo" poster="<?php echo htmlspecialchars($video['thumbnailPath'] ?? ''); ?>" preload="metadata" autoplay playsinline>
                     <source src="<?php echo htmlspecialchars($video['filePath']); ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -122,7 +117,7 @@ if (!$video) {
         </div>
 
         <div class="sidebar">
-            <h3>Recommended Videos</h3>
+            <h3 class="header-recommendation">Recommended Videos</h3>
             <div class="recommended-videos">
                 <?php foreach ($videoData as $item): ?>
                     <?php if ($item['id'] !== $video['id']): ?>
@@ -130,7 +125,14 @@ if (!$video) {
                             <!-- Masih rusak UInya (karena ada <a>) -->
                             <a href="?id=<?php echo $item['id']; ?>" class="card-link">
                                 <div class="thumbnail">
-                                    <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
+                                    <?php if (!empty($item['thumbnailPath']) && file_exists($item['thumbnailPath'])): ?>
+                                        <img src="<?= htmlspecialchars($item['thumbnailPath']) ?>" alt="Video Thumbnail">
+                                    <?php else: ?>
+                                        <video class="thumbnail-fallback" preload="metadata">
+                                            <source src="<?= htmlspecialchars($item['filePath']) ?>" type="video/mp4">
+                                        </video>
+                                    <?php endif; ?>
+
                                     <span class="duration"><?php echo gmdate("i:s", $item['duration']); ?></span>
                                 </div>
                                 <div class="video-card-info">
