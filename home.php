@@ -1,28 +1,6 @@
 <?php
-// index.php or home.php
-// Your actual video data
-$videos = [
-    [
-        "id" => 1,
-        "title" => "Dummy Title",
-        "description" => "Dummy description untuk apa kau tahu disini...",
-        "visibility" => "public",
-        "fileName" => "Cody Fry - 'The End' (Album Trailer).mp4",
-        "filePath" => "uploads/1751097744_Cody Fry - 'The End' (Album Trailer).mp4",
-        "fileSize" => "5.92 MB",
-        "duration" => 500
-    ],
-    [
-        "id" => "34101751100298",
-        "title" => "Upload sekali lagi",
-        "description" => "The best album created ever, made by cody fry",
-        "visibility" => "public",
-        "fileName" => "Cody Fry - 'The End' (Album Trailer).mp4",
-        "filePath" => "uploads/1751100298_Cody Fry - 'The End' (Album Trailer).mp4",
-        "fileSize" => "5.92 MB",
-        "duration" => 0
-    ]
-];
+$videos = json_decode(file_get_contents('video_data.json'), true);
+
 
 function formatDuration($seconds) {
     if ($seconds == 0) return "0:00";
@@ -84,14 +62,7 @@ function formatDuration($seconds) {
         <main class="content">
             <?php if (empty($videos)): ?>
                 <div class="no-videos">
-                    <div class="no-videos-icon">
-                        <svg viewBox="0 0 24 24" width="48" height="48">
-                            <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" fill="#606060"></path>
-                        </svg>
-                    </div>
                     <h2>No videos available</h2>
-                    <p>Upload your first video to get started!</p>
-                    <a href="/upload.php" class="upload-link">Upload Video</a>
                 </div>
             <?php else: ?>
                 <div class="video-grid">
@@ -118,11 +89,6 @@ function formatDuration($seconds) {
                                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#606060"></path>
                                             </svg>
                                         </span>
-                                        <div class="video-stats">
-                                            <span><?= getRandomViews() ?> views</span>
-                                            <span>•</span>
-                                            <span><?= getRandomUploadTime() ?></span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,19 +159,16 @@ function formatDuration($seconds) {
             const thumbnailVideos = document.querySelectorAll('.thumbnail-video');
             thumbnailVideos.forEach(video => {
                 video.addEventListener('loadedmetadata', function() {
-                    // Set video to a specific time for thumbnail (e.g., 10% of duration)
                     this.currentTime = this.duration * 0.1;
                 });
                 
                 video.addEventListener('seeked', function() {
-                    // Create canvas to capture frame
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     canvas.width = this.videoWidth;
                     canvas.height = this.videoHeight;
                     ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
                     
-                    // Convert to image and replace video
                     const img = document.createElement('img');
                     img.src = canvas.toDataURL();
                     img.alt = 'Video thumbnail';
