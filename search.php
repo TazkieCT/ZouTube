@@ -109,6 +109,7 @@ if ($searchQuery) {
             
             <div class="search-results-list">
                 <?php foreach ($searchResults as $video): ?>
+                    <?php if ($video['visibility'] !== 'public') continue; ?>
                     <div class="search-result-item" onclick="location.href='/ZouTube/player.php?id=<?= $video['id'] ?>'">
                         <div class="result-thumbnail">
                             <img src="<?= htmlspecialchars($video['thumbnailPath']) ?>" alt="<?= htmlspecialchars($video['title']) ?>">
