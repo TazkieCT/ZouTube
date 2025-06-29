@@ -51,10 +51,9 @@ if (!$video) {
             </button>
         </form>
         <div class="header-right">
-            <div class="profile">
-                <div class="profile-avatar">Z</div>
-            </div>
+            <a href="/ZouTube/login.php" class="login-button">Login</a>
         </div>
+
     </header>
 
     <div class="main-content">
