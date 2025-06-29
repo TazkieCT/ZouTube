@@ -70,9 +70,14 @@ function formatDuration($seconds) {
                         <div class="video-card" onclick="playVideo('<?= htmlspecialchars($video['filePath']) ?>')">
                             <a href="/ZouTube/player.php?id=<?php echo $video['id']; ?>">
                                 <div class="video-thumbnail">
-                                    <video class="thumbnail-video" preload="metadata">
-                                        <source src="<?= htmlspecialchars($video['filePath']) ?>" type="video/mp4">
-                                    </video>
+                                    <?php if (!empty($video['thumbnailPath']) && file_exists($video['thumbnailPath'])): ?>
+                                        <img src="<?= htmlspecialchars($video['thumbnailPath']) ?>" alt="Video Thumbnail" class="thumbnail-image">
+                                    <?php else: ?>
+                                        <video class="thumbnail-video" preload="metadata">
+                                            <source src="<?= htmlspecialchars($video['filePath']) ?>" type="video/mp4">
+                                        </video>
+                                    <?php endif; ?>
+
                                     <div class="play-button">
                                         <svg viewBox="0 0 24 24" width="48" height="48">
                                             <path d="M8 5v14l11-7z" fill="white"></path>
