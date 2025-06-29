@@ -1,6 +1,20 @@
 <?php
+session_start();
 $errors = [];
 $videoData = null;
+
+if (isset($_GET['logout']) && $_GET['logout'] === 'true') {
+    session_destroy();
+    header('Location: /ZouTube/login.php');
+    exit;
+}
+
+
+if (!isset($_SESSION['username'])) {
+    header('Location: /ZouTube/login.php');
+    exit;
+}
+
 
 function generateId() {
     return random_int(1000, 9999) . time();
@@ -52,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (move_uploaded_file($file['tmp_name'], $path)) {
                 $videoData = [
                     'id' => generateId(),
-                    'creator' => "Tazkie", // Ini ganti sama cookie nanti
+                    'creator' => $_SESSION['username'],
                     'title' => htmlspecialchars($title),
                     'description' => htmlspecialchars($_POST['videoDescription'] ?? ''),
                     'visibility' => $_POST['visibility'] === 'public' ? 'public' : 'private',
@@ -113,9 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
         </div>
         <div class="header-right">
-            <div class="profile">
-                <div class="profile-avatar">Z</div>
-            </div>
+            <a href="?logout=true" class="logout-link" style="margin-left: 10px; color: white; text-decoration: none;">Logout</a>
         </div>
     </header>
 
