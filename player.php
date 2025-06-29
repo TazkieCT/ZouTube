@@ -1,3 +1,21 @@
+<?php
+$videoData = json_decode(file_get_contents('video_data.json'), true);
+
+$videoId = $_GET['id'] ?? $videoData[0]['id'];
+
+$video = null;
+foreach ($videoData as $item) {
+    if ($item['id'] == $videoId) {
+        $video = $item;
+        break;
+    }
+}
+
+if (!$video) {
+    die("Video not found.");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,17 +58,11 @@
 
     <div class="main-content">
         <div class="video-container">
-            <!-- Video Player -->
             <div class="video-player">
-                <video id="mainVideo" poster="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg">
-                    <source src="/uploads/Video Christian Wijaya.mp4" type="video/mp4">
+                <video id="mainVideo" poster="">
+                    <source src="<?php echo htmlspecialchars($video['filePath']); ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                
-                <!-- <div class="video-title-overlay"> -->
-                    <!-- <h2>Artist Name</h2> -->
-                <!-- </div> -->
-                
                 <div class="video-controls" id="videoControls">
                     <div class="progress-container">
                         <div class="progress-bar">
@@ -101,140 +113,41 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Info Video -->
             <div class="video-info">
-                <h1 class="video-title">Artist Name x Featured Artist - Song Title</h1>
-                <div class="channel-info">
-                    <div class="channel-avatar">
-                        <img src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back06.jpg" alt="Channel Avatar">
-                    </div>
-                    <div class="channel-details">
-                        <h3 class="channel-name">Channel Name</h3>
-                    </div>
-                </div>
-                <div class="video-actions">
-                    <div class="action-group">
-                        <button class="action-button">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z"></path>
-                            </svg>
-                            <span>125K</span>
-                        </button>
-                        <button class="action-button">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"></path>
-                            </svg>
-                            <span>Dislike</span>
-                        </button>
-                    </div>
-                    <div class="action-group">
-                        <button class="action-button">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path d="M17 18v1H6V3h11v1h1V3c0-.55-.45-1-1-1H6c-.55 0-1 .45-1 1v16c0 .55.45 1 1 1h11c.55 0 1-.45 1-1v-1h-1zm3.55-10L17 4.46V10h1V5.54l2.19 2.19 1.36-1.36-1-1.37zm-3.6 9.43l1.36 1.36 4.43-4.43-4.43-4.43-1.36 1.36 2.19 2.19H13v1.93h7.14l-2.19 2.02z"></path>
-                            </svg>
-                            <span>Download</span>
-                        </button>
-                    </div>
-                </div>
+                <h1 class="video-title"><?php echo htmlspecialchars($video['title']); ?></h1>
                 <div class="video-description">
-                    <div class="description-stats">
-                        <span>1.5M views</span>
-                        <span>•</span>
-                        <span>2 weeks ago</span>
-                    </div>
-                    <div class="description-text">
-                        <p>Official music video for "Song Title" by Artist Name featuring Featured Artist.</p>
-                        <p>Stream/Download: <a href="#">https://link.to/song</a></p>
-                        <p>Follow Artist Name:<br>
-                        Instagram: <a href="#">@artistname</a><br>
-                        Twitter: <a href="#">@artistname</a><br>
-                        TikTok: <a href="#">@artistname</a></p>
-                        <p>Lyrics:<br>
-                        Verse 1: Lorem ipsum dolor sit amet<br>
-                        Consectetur adipiscing elit<br>
-                        Sed do eiusmod tempor incididunt<br>
-                        Ut labore et dolore magna aliqua</p>
-                    </div>
+                    <p><?php echo nl2br(htmlspecialchars($video['description'])); ?></p>
+                    <p><strong>Duration:</strong> <?php echo gmdate("i:s", $video['duration']); ?></p>
+                    <p><strong>File Size:</strong> <?php echo htmlspecialchars($video['fileSize']); ?></p>
+                    <p><strong>Visibility:</strong> <?php echo htmlspecialchars($video['visibility']); ?></p>
                 </div>
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="sidebar">
-
-            <!-- List Of Other Videos (Recommended Videos) -->
+            <h3>Recommended Videos</h3>
             <div class="recommended-videos">
-                <div class="video-card">
-                    <div class="thumbnail">
-                        <img src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/back06.jpg" alt="Video Thumbnail">
-                        <span class="duration">3:45</span>
-                    </div>
-                    <div class="video-card-info">
-                        <h3 class="video-card-title">Another Great Song - Official Music Video</h3>
-                        <p class="video-card-channel">Channel Name</p>
-                        <p class="video-card-stats">2.4M views • 3 months ago</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="thumbnail">
-                        <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
-                        <span class="duration">4:20</span>
-                    </div>
-                    <div class="video-card-info">
-                        <h3 class="video-card-title">Top 10 Songs of the Month</h3>
-                        <p class="video-card-channel">Music Charts</p>
-                        <p class="video-card-stats">1.8M views • 2 weeks ago</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="thumbnail">
-                        <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
-                        <span class="duration">5:12</span>
-                    </div>
-                    <div class="video-card-info">
-                        <h3 class="video-card-title">Artist Interview - Behind the Scenes</h3>
-                        <p class="video-card-channel">Music News</p>
-                        <p class="video-card-stats">542K views • 1 week ago</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="thumbnail">
-                        <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
-                        <span class="duration">3:18</span>
-                    </div>
-                    <div class="video-card-info">
-                        <h3 class="video-card-title">New Release - Lyric Video</h3>
-                        <p class="video-card-channel">Record Label</p>
-                        <p class="video-card-stats">1.2M views • 5 days ago</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="thumbnail">
-                        <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
-                        <span class="duration">8:42</span>
-                    </div>
-                    <div class="video-card-info">
-                        <h3 class="video-card-title">Music Production Tutorial</h3>
-                        <p class="video-card-channel">Producer Academy</p>
-                        <p class="video-card-stats">876K views • 2 months ago</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="thumbnail">
-                        <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
-                        <span class="duration">2:54</span>
-                    </div>
-                    <div class="video-card-info">
-                        <h3 class="video-card-title">Acoustic Cover - Live Session</h3>
-                        <p class="video-card-channel">Cover Artists</p>
-                        <p class="video-card-stats">325K views • 3 weeks ago</p>
-                    </div>
-                </div>
+                <?php foreach ($videoData as $item): ?>
+                    <?php if ($item['id'] !== $video['id']): ?>
+                        <div class="video-card">
+                            <!-- Masih rusak UInya (karena ada <a>) -->
+                            <a href="?id=<?php echo $item['id']; ?>">
+                                <div class="thumbnail">
+                                    <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
+                                    <span class="duration"><?php echo gmdate("i:s", $item['duration']); ?></span>
+                                </div>
+                                <div class="video-card-info">
+                                    <h3 class="video-card-title"><?php echo htmlspecialchars($item['title']); ?></h3>
+                                    <p class="video-card-channel"><?php echo htmlspecialchars($item['creator'] ?? 'Unknown'); ?></p>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
 
-    <script src="/js/player.js"></script>
+    <script src="/ZouTube/js/player.js"></script>
 </body>
 </html>

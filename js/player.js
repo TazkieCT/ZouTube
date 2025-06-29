@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     playPauseBtn.addEventListener('click', togglePlayPause);
     video.addEventListener('click', togglePlayPause);
     
-    // Update progress bar
     video.addEventListener('timeupdate', function() {
         const progress = (video.currentTime / video.duration) * 100;
         progressFill.style.width = `${progress}%`;
@@ -39,14 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
         currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
     });
     
-    // Set video duration display when metadata is loaded
     video.addEventListener('loadedmetadata', function() {
         const durationMinutes = Math.floor(video.duration / 60);
         const durationSeconds = Math.floor(video.duration % 60);
         durationDisplay.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
     });
     
-    // Click on progress bar to see at a specific time
     progressBar.addEventListener('click', function(e) {
         const progressBarRect = progressBar.getBoundingClientRect();
         const clickPosition = e.clientX - progressBarRect.left;
@@ -56,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
         video.currentTime = seekTime;
     });
     
-    // Volume control
     volumeSlider.addEventListener('input', function() {
         video.volume = volumeSlider.value / 100;
         if (video.volume === 0) {

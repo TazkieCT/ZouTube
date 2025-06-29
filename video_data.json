@@ -1,22 +1,32 @@
 [
     {
-        "id": 1,
-        "title": "Dummy Title",
-        "description": "Dummy description untuk apa kau tahu disini...",
+        "id": "62131751179059",
+        "title": "Test upload 1 video",
+        "description": "Apakah",
         "visibility": "public",
         "fileName": "Cody Fry - 'The End' (Album Trailer).mp4",
-        "filePath": "uploads\/1751097744_Cody Fry - 'The End' (Album Trailer).mp4",
+        "filePath": "uploads\/1751179058_Cody Fry - 'The End' (Album Trailer).mp4",
         "fileSize": "5.92 MB",
-        "duration": 500
+        "duration": 65
     },
     {
-        "id": "34101751100298",
-        "title": "Upload sekali lagi",
-        "description": "The best album created ever, made by cody fry",
+        "id": "37421751180689",
+        "title": "Video 2",
+        "description": "Ini video lain yaitu video 2",
         "visibility": "public",
         "fileName": "Cody Fry - 'The End' (Album Trailer).mp4",
-        "filePath": "uploads\/1751100298_Cody Fry - 'The End' (Album Trailer).mp4",
+        "filePath": "uploads\/1751180689_Cody Fry - 'The End' (Album Trailer).mp4",
         "fileSize": "5.92 MB",
-        "duration": 0
+        "duration": 65
+    },
+    {
+        "id": "31941751180726",
+        "title": "Hello guys this is my fourth video",
+        "description": "Ini adalah video ke empat yang akan menjadi bagian terakhir.",
+        "visibility": "public",
+        "fileName": "Cody Fry - 'The End' (Album Trailer).mp4",
+        "filePath": "uploads\/1751180726_Cody Fry - 'The End' (Album Trailer).mp4",
+        "fileSize": "5.92 MB",
+        "duration": 65
     }
 ]
