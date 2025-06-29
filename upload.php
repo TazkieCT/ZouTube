@@ -6,14 +6,6 @@ function generateId() {
     return random_int(1000, 9999) . time();
 }
 
-function getVideoDuration($filePath) {
-    if (!file_exists($filePath)) return 0;
-    
-    $command = "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 " . escapeshellarg($filePath);
-    $duration = shell_exec($command);
-    return (int) round(floatval($duration));
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['videoTitle'] ?? '');
     if ($title === '') {
@@ -27,36 +19,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $thumbFile = $_FILES['thumbnailFile'];
 
         if ($thumbFile['error'] === UPLOAD_ERR_OK && strpos($thumbFile['type'], 'image/') === 0) {
-            $thumbDir = __DIR__ . '/uploads/thumbnail/';
+            $thumbDir = __DIR__ . '/uploads/thumbnails/';
             if (!is_dir($thumbDir)) mkdir($thumbDir, 0755, true);
 
             $thumbName = time() . '_' . basename($thumbFile['name']);
             $thumbTargetPath = $thumbDir . $thumbName;
 
             if (move_uploaded_file($thumbFile['tmp_name'], $thumbTargetPath)) {
-                $thumbnailPath = 'uploads/thumbnail/' . $thumbName;
+                $thumbnailPath = 'uploads/thumbnails/' . $thumbName;
             } else {
-                $errors[] = 'Gagal menyimpan thumbnail.';
+                $errors[] = 'Failed to save Thumbnail.';
             }
         } else {
-            $errors[] = 'Thumbnail harus berupa gambar.';
+            $errors[] = 'Thumbnail must be image (png/jpg/jpeg).';
         }
     }
 
     //Ini buat validasi videonya
     if (!empty($_FILES['videoFile']['tmp_name'])) {
-            $file = $_FILES['videoFile'];
+        $file = $_FILES['videoFile'];
         if ($file['error'] !== UPLOAD_ERR_OK) {
             $errors[] = 'Kesalahan saat mengupload file.';
         } elseif (strpos($file['type'], 'video/') !== 0) {
             $errors[] = 'File must be video.';
+        } elseif ($file['size'] > 100 * 1024 * 1024) {
+            $errors[] = 'Video file must be 100MB or less.';
         } else {
-            $dir = __DIR__ . '/uploads/';
+            $dir = __DIR__ . '/uploads/videos/';
             if (!is_dir($dir)) mkdir($dir, 0755, true);
             $name = time() . '_' . basename($file['name']);
             $path = $dir . $name;
             if (move_uploaded_file($file['tmp_name'], $path)) {
-                $duration = getVideoDuration($path);
                 $videoData = [
                     'id' => generateId(),
                     'creator' => "Tazkie", // Ini ganti sama cookie nanti
@@ -64,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'description' => htmlspecialchars($_POST['videoDescription'] ?? ''),
                     'visibility' => $_POST['visibility'] === 'public' ? 'public' : 'private',
                     'fileName' => htmlspecialchars($file['name']),
-                    'filePath' => 'uploads/video/' . $name,
+                    'filePath' => 'uploads/videos/' . $name,
                     'thumbnailPath' => $thumbnailPath,
                     'fileSize' => round($file['size'] / 1024 / 1024, 2) . ' MB',
-                    'duration' => $duration
+                    'duration' => 0
                 ];
 
 
@@ -99,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Video - ZouTube</title>
-    <link rel="stylesheet" href="styles/upload.css">
+    <link rel="stylesheet" href="/ZouTube/styles/upload.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
 </head>
 <body>
@@ -111,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span></span>
                 <span></span>
             </button>
-            <a href="#" class="logo">
+            <a href="/ZouTube/dashboard.php" class="logo">
                 <svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
                     <rect width="30" height="20" fill="#FF0000" rx="5" />
                     <path d="M12 6L20 10L12 14V6Z" fill="white" />
