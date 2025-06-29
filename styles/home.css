@@ -253,8 +253,15 @@ body {
     transition: transform 0.2s;
 }
 
+
 .video-card {
     color: black;
+}
+
+
+.video-card a {
+    color: inherit;
+    text-decoration: none;
 }
 
 .video-card:hover {
