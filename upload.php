@@ -20,9 +20,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Title can\' be empty.';
     }
 
-    // Validasi file
+    $thumbnailPath = '';
+
+    //Ini buat validasi thumbnailnya
+    if (!empty($_FILES['thumbnailFile']['tmp_name'])) {
+        $thumbFile = $_FILES['thumbnailFile'];
+
+        if ($thumbFile['error'] === UPLOAD_ERR_OK && strpos($thumbFile['type'], 'image/') === 0) {
+            $thumbDir = __DIR__ . '/uploads/thumbnail/';
+            if (!is_dir($thumbDir)) mkdir($thumbDir, 0755, true);
+
+            $thumbName = time() . '_' . basename($thumbFile['name']);
+            $thumbTargetPath = $thumbDir . $thumbName;
+
+            if (move_uploaded_file($thumbFile['tmp_name'], $thumbTargetPath)) {
+                $thumbnailPath = 'uploads/thumbnail/' . $thumbName;
+            } else {
+                $errors[] = 'Gagal menyimpan thumbnail.';
+            }
+        } else {
+            $errors[] = 'Thumbnail harus berupa gambar.';
+        }
+    }
+
+    //Ini buat validasi videonya
     if (!empty($_FILES['videoFile']['tmp_name'])) {
-        $file = $_FILES['videoFile'];
+            $file = $_FILES['videoFile'];
         if ($file['error'] !== UPLOAD_ERR_OK) {
             $errors[] = 'Kesalahan saat mengupload file.';
         } elseif (strpos($file['type'], 'video/') !== 0) {
@@ -36,14 +59,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $duration = getVideoDuration($path);
                 $videoData = [
                     'id' => generateId(),
+                    'creator' => "Tazkie", // Ini ganti sama cookie nanti
                     'title' => htmlspecialchars($title),
                     'description' => htmlspecialchars($_POST['videoDescription'] ?? ''),
                     'visibility' => $_POST['visibility'] === 'public' ? 'public' : 'private',
                     'fileName' => htmlspecialchars($file['name']),
-                    'filePath' => 'uploads/' . $name,
+                    'filePath' => 'uploads/video/' . $name,
+                    'thumbnailPath' => $thumbnailPath,
                     'fileSize' => round($file['size'] / 1024 / 1024, 2) . ' MB',
                     'duration' => $duration
                 ];
+
 
                 $jsonFile = __DIR__ . '/video_data.json';
 
@@ -186,6 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label>Thumbnail</label>
                                     <p class="thumbnail-help">Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention.</p>
                                     
+                                    <input type="file" name="thumbnailFile" id="thumbnailFile" accept="image/*">
                                     <div class="thumbnails-container" id="thumbnailsContainer">
                                         <div class="thumbnail-placeholder">
                                             <svg viewBox="0 0 24 24" width="24" height="24">
