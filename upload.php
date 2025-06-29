@@ -9,7 +9,6 @@ function generateId() {
 function getVideoDuration($filePath) {
     if (!file_exists($filePath)) return 0;
     
-    // Use ffprobe to get duration
     $command = "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 " . escapeshellarg($filePath);
     $duration = shell_exec($command);
     return (int) round(floatval($duration));
@@ -18,7 +17,7 @@ function getVideoDuration($filePath) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['videoTitle'] ?? '');
     if ($title === '') {
-        $errors[] = 'Title wajib diisi.';
+        $errors[] = 'Title can\' be empty.';
     }
 
     // Validasi file
@@ -27,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($file['error'] !== UPLOAD_ERR_OK) {
             $errors[] = 'Kesalahan saat mengupload file.';
         } elseif (strpos($file['type'], 'video/') !== 0) {
-            $errors[] = 'File bukan video.';
+            $errors[] = 'File must be video.';
         } else {
             $dir = __DIR__ . '/uploads/';
             if (!is_dir($dir)) mkdir($dir, 0755, true);
@@ -232,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <button class="action-button primary" id="publishButton" type="submit" disabled>PUBLISH</button>
                             </div>
                         </div>
-                        <input type="file" id="fileInput" name="videoFile" accept="video/*" style="display: none;">
+                        <input type="file" id="fileInput" name="videoFile" style="display: none;">
                     </form>
                 </main>
 
