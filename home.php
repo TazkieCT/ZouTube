@@ -23,7 +23,7 @@ function formatDuration($seconds) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZouTube</title>
-    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="/ZouTube/styles/home.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
 </head>
 <body>
@@ -68,28 +68,30 @@ function formatDuration($seconds) {
                 <div class="video-grid">
                     <?php foreach ($videos as $video): ?>
                         <div class="video-card" onclick="playVideo('<?= htmlspecialchars($video['filePath']) ?>')">
-                            <div class="video-thumbnail">
-                                <video class="thumbnail-video" preload="metadata">
-                                    <source src="<?= htmlspecialchars($video['filePath']) ?>" type="video/mp4">
-                                </video>
-                                <div class="play-button">
-                                    <svg viewBox="0 0 24 24" width="48" height="48">
-                                        <path d="M8 5v14l11-7z" fill="white"></path>
-                                    </svg>
+                            <a href="/ZouTube/player.php?id=<?php echo $video['id']; ?>">
+                                <div class="video-thumbnail">
+                                    <video class="thumbnail-video" preload="metadata">
+                                        <source src="<?= htmlspecialchars($video['filePath']) ?>" type="video/mp4">
+                                    </video>
+                                    <div class="play-button">
+                                        <svg viewBox="0 0 24 24" width="48" height="48">
+                                            <path d="M8 5v14l11-7z" fill="white"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="video-duration"><?= formatDuration($video['duration']) ?></span>
                                 </div>
-                                <span class="video-duration"><?= formatDuration($video['duration']) ?></span>
-                            </div>
-                            <div class="video-info">
-                                <div class="video-details">
-                                    <h3 class="video-title"><?= htmlspecialchars($video['title']) ?></h3>
-                                    <div class="video-meta">
-                                        <span class="channel-name">
-                                            <!-- Channel name -->
-                                            Tazkie
-                                        </span>
+                                <div class="video-info">
+                                    <div class="video-details">
+                                        <h3 class="video-title"><?= htmlspecialchars($video['title']) ?></h3>
+                                        <div class="video-meta">
+                                            <span class="channel-name">
+                                                <!-- Channel name -->
+                                                Tazkie
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 </div>

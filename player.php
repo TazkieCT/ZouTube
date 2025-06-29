@@ -131,7 +131,7 @@ if (!$video) {
                     <?php if ($item['id'] !== $video['id']): ?>
                         <div class="video-card">
                             <!-- Masih rusak UInya (karena ada <a>) -->
-                            <a href="?id=<?php echo $item['id']; ?>">
+                            <a href="?id=<?php echo $item['id']; ?>" class="card-link">
                                 <div class="thumbnail">
                                     <img src="https://via.placeholder.com/168x94" alt="Video Thumbnail">
                                     <span class="duration"><?php echo gmdate("i:s", $item['duration']); ?></span>
