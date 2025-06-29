@@ -31,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login - ZouTube</title>
-    <link rel="stylesheet" href="/ZouTube/styles/dashboard.css">
+    <link rel="stylesheet" href="/ZouTube/styles/auth.css">
 </head>
 <body>
     <div class="container" style="align-items: center; justify-content: center; padding: 60px 0;">
         <div class="video-table" style="width: 100%; max-width: 400px;">
-            <h2 style="margin-bottom: 16px;">Login</h2>
+            <h2 style="margin-bottom: 16px;">Login as a creator</h2>
             <?php if ($errorMessage): ?>
                 <p style="color: red;"><?= $errorMessage ?></p>
             <?php endif; ?>
