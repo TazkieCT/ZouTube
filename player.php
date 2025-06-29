@@ -121,7 +121,7 @@ if (!$video) {
                         $escapedDescription = htmlspecialchars($video['description']);
                         $withClickableHashtags = preg_replace_callback('/#(\w+)/', function($matches) {
                             $tag = htmlspecialchars($matches[1]);
-                            return '<a href="ZouTube/search.php?query=' . urlencode($tag) . '" class="hashtag">#' . $tag . '</a>';
+                            return '<a href="/ZouTube/search.php?query=' . urlencode($tag) . '" class="hashtag">#' . $tag . '</a>';
                         }, nl2br($escapedDescription));
                         echo $withClickableHashtags;
                         ?>

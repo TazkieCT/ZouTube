@@ -78,6 +78,21 @@ body {
   padding: 0 16px;
 }
 
+.login-button {
+    padding: 8px 16px;
+    background-color: #cc0000;
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #a30000;
+}
+
+
 .search-input {
   flex: 1;
   height: 40px;
