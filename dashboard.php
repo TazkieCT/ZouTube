@@ -110,7 +110,7 @@ function formatDuration($seconds) {
                                 </div>
                                 <div class="video-cell">
                                     <div class="video-thumbnail">
-                                        <video src="<?= htmlspecialchars($video['filePath']) ?>" muted width="120" height="80" style="object-fit: cover;" preload="metadata"></video>
+                                        <img src="/ZouTube/<?= htmlspecialchars($video['thumbnailPath']) ?>" alt="Video Thumbnail" class="thumbnail-image">
                                         <span class="video-duration"><?= formatDuration($video['duration']) ?></span>
                                     </div>
                                     <div class="video-info">

@@ -111,7 +111,16 @@ if (!$video) {
             <div class="video-info">
                 <h1 class="video-title"><?php echo htmlspecialchars($video['title']); ?></h1>
                 <div class="video-description">
-                    <p><?php echo nl2br(htmlspecialchars($video['description'])); ?></p>
+                    <p>
+                        <?php
+                        $escapedDescription = htmlspecialchars($video['description']);
+                        $withClickableHashtags = preg_replace_callback('/#(\w+)/', function($matches) {
+                            $tag = htmlspecialchars($matches[1]);
+                            return '<a href="ZouTube/search.php?tag=' . urlencode($tag) . '" class="hashtag">#' . $tag . '</a>';
+                        }, nl2br($escapedDescription));
+                        echo $withClickableHashtags;
+                        ?>
+                    </p>
                 </div>
             </div>
         </div>

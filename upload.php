@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'filePath' => 'uploads/videos/' . $name,
                     'thumbnailPath' => $thumbnailPath,
                     'fileSize' => round($file['size'] / 1024 / 1024, 2) . ' MB',
-                    'duration' => 0
+                    'duration' => isset($_POST['videoDuration']) ? (int) $_POST['videoDuration'] : 0
                 ];
 
 
@@ -213,6 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <path d="M14.14 11.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"></path>
                                             </svg>
                                             <p>Upload your video to generate thumbnails</p>
+                                            <!-- Ini biar bisa ngambil durasi videonya -->
+                                            <input type="hidden" name="videoDuration" id="videoDurationInput"> 
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +332,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             videoPreview.addEventListener('loadedmetadata', function() {
                 videoDuration.textContent = formatDuration(videoPreview.duration);
+
+                let durationInput = document.getElementById('videoDurationInput');
+                if (!durationInput) {
+                    durationInput = document.createElement('input');
+                    durationInput.type = 'hidden';
+                    durationInput.name = 'videoDuration';
+                    durationInput.id = 'videoDurationInput';
+                    document.querySelector('form').appendChild(durationInput);
+                }
+                durationInput.value = Math.round(videoPreview.duration);
             });
+
             
             document.getElementById('uploadPlaceholder').style.display = 'none';
             document.getElementById('videoPreviewContainer').style.display = 'block';

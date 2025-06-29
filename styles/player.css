@@ -233,6 +233,16 @@ button {
     position: relative;
 }
 
+/* .hashtag {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hashtag:hover {
+    text-decoration: underline;
+} */
+
 .progress-fill {
     position: absolute;
     top: 0;
