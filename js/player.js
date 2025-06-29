@@ -38,11 +38,24 @@ document.addEventListener('DOMContentLoaded', function() {
         currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
     });
     
-    video.addEventListener('loadedmetadata', function() {
+    video.addEventListener('loadedmetadata', function () {
+        if (isNaN(video.duration) || video.duration === Infinity || video.duration === 0) {
+            video.load();
+        }
+
         const durationMinutes = Math.floor(video.duration / 60);
         const durationSeconds = Math.floor(video.duration % 60);
         durationDisplay.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
     });
+
+    setTimeout(() => {
+        if (!isNaN(video.duration) && video.duration > 0) {
+            const durationMinutes = Math.floor(video.duration / 60);
+            const durationSeconds = Math.floor(video.duration % 60);
+            durationDisplay.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+        }
+    }, 2000);
+
     
     progressBar.addEventListener('click', function(e) {
         const progressBarRect = progressBar.getBoundingClientRect();
@@ -83,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Fullscreen feature yeee
+    // This is Fullscreen feature
     fullscreenBtn.addEventListener('click', function() {
         if (document.fullscreenElement) {
             document.exitFullscreen();
@@ -127,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
     videoPlayer.addEventListener('mousemove', showControls);
     videoPlayer.addEventListener('mouseleave', hideControls);
     
-    // Prevent controls from disappearing when hovering over them
     videoControls.addEventListener('mouseenter', function() {
         clearTimeout(controlsTimeout);
     });
@@ -165,4 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     video.volume = 0.75;
     volumeSlider.value = 75;
+
+    // video.play().catch((error) => {
+    //     console.warn("Autoplay blocked:", error);
+    // });
 });

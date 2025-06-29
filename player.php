@@ -36,14 +36,20 @@ if (!$video) {
                 <span class="logo-text">ZouTube</span>
             </a>
         </div>
-        <div class="search-container">
-            <button class="search-button">
+        <form class="search-container" action="/ZouTube/search.php" method="GET">
+            <input type="text" class="search-input" name="query" placeholder="Search" required>
+            <button type="submit" class="search-button">
                 <svg viewBox="0 0 24 24" width="24" height="24">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 
+                            16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 
+                            5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 
+                            L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 
+                            5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 
+                            11.99 14 9.5 14z">
+                    </path>
                 </svg>
             </button>
-            <input type="text" class="search-input" placeholder="Search">
-        </div>
+        </form>
         <div class="header-right">
             <div class="profile">
                 <div class="profile-avatar">Z</div>
@@ -116,7 +122,7 @@ if (!$video) {
                         $escapedDescription = htmlspecialchars($video['description']);
                         $withClickableHashtags = preg_replace_callback('/#(\w+)/', function($matches) {
                             $tag = htmlspecialchars($matches[1]);
-                            return '<a href="ZouTube/search.php?tag=' . urlencode($tag) . '" class="hashtag">#' . $tag . '</a>';
+                            return '<a href="ZouTube/search.php?query=' . urlencode($tag) . '" class="hashtag">#' . $tag . '</a>';
                         }, nl2br($escapedDescription));
                         echo $withClickableHashtags;
                         ?>
@@ -129,9 +135,9 @@ if (!$video) {
             <h3 class="header-recommendation">Recommended Videos</h3>
             <div class="recommended-videos">
                 <?php foreach ($videoData as $item): ?>
+                    <?php if ($item['visibility'] !== 'public') continue; ?>
                     <?php if ($item['id'] !== $video['id']): ?>
                         <div class="video-card">
-                            <!-- Masih rusak UInya (karena ada <a>) -->
                             <a href="?id=<?php echo $item['id']; ?>" class="card-link">
                                 <div class="thumbnail">
                                     <?php if (!empty($item['thumbnailPath']) && file_exists($item['thumbnailPath'])): ?>
