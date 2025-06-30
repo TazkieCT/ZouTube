@@ -15,29 +15,28 @@ function formatDuration($seconds) {
 $searchResults = [];
 
 if ($searchQuery) {
+    $term = $searchQuery;
     $isHashtag = false;
     $searchByDescription = false;
 
-    if (preg_match('/^#(\w+)(\s.*)?$/', $searchQuery, $matches)) {
+    if (preg_match('/^#\w+$/', $searchQuery)) {
         $isHashtag = true;
-        $hashtag = $matches[1];
-        $hasExtra = isset($matches[2]) && trim($matches[2]) !== '';
-
-        if (!$hasExtra) {
-            $searchByDescription = true;
-        }
-
-        $term = $hashtag;
-    } else {
         $term = $searchQuery;
-    }
 
-    foreach ($videos as $video) {
-        $titleMatch = stripos($video['title'], $term) !== false;
-        $descMatch = $searchByDescription && stripos($video['description'], $term) !== false;
-
-        if ($titleMatch || $descMatch) {
-            $searchResults[] = $video;
+        foreach ($videos as $video) {
+            if (
+                isset($video['description']) &&
+                preg_match_all('/#\w+/', $video['description'], $hashtags) &&
+                in_array($term, $hashtags[0], true)
+            ) {
+                $searchResults[] = $video;
+            }
+        }
+    } else {
+        foreach ($videos as $video) {
+            if (stripos($video['title'], $searchQuery) !== false) {
+                $searchResults[] = $video;
+            }
         }
     }
 }
