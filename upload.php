@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <button class="action-button primary" id="publishButton" type="submit" disabled>PUBLISH</button>
                             </div>
                         </div>
-                        <input type="file" id="fileInput" name="videoFile" style="display: none;">
+                        <input type="file" id="fileInput" name="videoFile" accept="video/*" style="display: none;">
                     </form>
                 </main>
 
