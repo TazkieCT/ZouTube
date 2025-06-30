@@ -78,11 +78,11 @@ function formatDuration($seconds) {
                                         </video>
                                     <?php endif; ?>
 
-                                    <div class="play-button">
+                                    <!-- <div class="play-button">
                                         <svg viewBox="0 0 24 24" width="48" height="48">
                                             <path d="M8 5v14l11-7z" fill="white"></path>
                                         </svg>
-                                    </div>
+                                    </div> -->
                                     <span class="video-duration"><?= formatDuration($video['duration']) ?></span>
                                 </div>
                                 <div class="video-info">
