@@ -60,10 +60,11 @@ body {
   font-weight: 700;
   font-size: 20px;
   color: #0f0f0f;
+  text-decoration: none;
 }
 
 .logo-icon {
-  margin-right: 8px;
+  margin-right: 4px;
 }
 
 .header-right {
