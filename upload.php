@@ -112,23 +112,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header class="header">
         <div class="header-left">
-            <!-- INI LOGO BUAT BUTTON MENU -->
             <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <a href="/ZouTube/dashboard.php" class="logo">
                 <svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-                    <rect width="30" height="20" fill="#FF0000" rx="5" />
-                    <path d="M12 6L20 10L12 14V6Z" fill="white" />
+                    <rect width="30" height="20" fill="#FF0000" rx="5"/>
+                    <path d="M12 6L20 10L12 14V6Z" fill="white"/>
                 </svg>
                 <span class="logo-text">ZouTube</span>
             </a>
         </div>
         <div class="header-right">
-            <a href="?logout=true" class="logout-link" style="margin-left: 10px; color: white; text-decoration: none;">Logout</a>
-        </div>
+            <a href="?logout=true" class="logout-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16,17 21,12 16,7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                Logout
+            </a>
+        </div>    
     </header>
 
     <div class="main-content">

@@ -66,41 +66,20 @@ body {
 .logo-text {
     color: #0f0f0f;
 }
-  
-.search-container {
+
+.logout-button {
     display: flex;
     align-items: center;
-    flex: 1;
-    max-width: 640px;
-    margin: 0 40px;
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    padding: 0 16px;
-}
-  
-.search-input {
-    flex: 1;
-    height: 40px;
-    padding: 0 12px;
-    font-size: 16px;
-    border: none;
-    background: transparent;
-    outline: none;
-}
-  
-.search-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
+    gap: 8px;
+    padding: 8px 16px;
     background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-  
-.search-button svg {
-    fill: #606060;
+    color: #606060;
+    text-decoration: none;
+    border: 1px solid #e0e0e0;
+    border-radius: 18px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
   
 .header-right {

@@ -72,7 +72,7 @@ function formatDuration($seconds) {
             </a>
         </div>
         <div class="header-right">
-            <a href="/logout.php" class="logout-button">
+            <a href="?logout=true" class="logout-button">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                     <polyline points="16,17 21,12 16,7"/>
@@ -112,7 +112,7 @@ function formatDuration($seconds) {
                 <div class="table-header">
                     <div class="video-cell">Video</div>
                     <div class="visibility-cell">Visibility</div>
-                    <div class="date-cell">Action</div>
+                    <div class="visibility-cell">Action</div>
                 </div>
 
                 <?php if (count($videos) > 0): ?>
@@ -133,7 +133,7 @@ function formatDuration($seconds) {
                                     <?= ucfirst($video['visibility']) ?>
                                 </span>
                             </div>
-                            <div class="date-cell">
+                            <div class="action-cell">
                                 <form method="POST" action="/ZouTube/update_visibility.php" class="toggle-form">
                                     <input type="hidden" name="video_id" value="<?= $video['id'] ?>">
                                     <button type="submit" class="visibility-toggle">

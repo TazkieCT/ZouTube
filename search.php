@@ -101,13 +101,13 @@ if ($searchQuery) {
             <div class="search-results-list">
                 <?php foreach ($searchResults as $video): ?>
                     <?php if ($video['visibility'] !== 'public') continue; ?>
-                    <div class="search-result-item" onclick="location.href='/ZouTube/player.php?id=<?= $video['id'] ?>'">
+                    <div class="search-result-item" onclick="location.href='/ZouTube/watch.php?id=<?= $video['id'] ?>'">
                         <div class="result-thumbnail">
                             <img src="<?= htmlspecialchars($video['thumbnailPath']) ?>" alt="<?= htmlspecialchars($video['title']) ?>">
                             <span class="video-duration"><?= formatDuration($video['duration']) ?></span>
                         </div>
                         <div class="result-info">
-                            <a href="/player.php?id=<?= $video['id'] ?>" class="result-title">
+                            <a href="/watch.php?id=<?= $video['id'] ?>" class="result-title">
                                 <?= htmlspecialchars($video['title']) ?>
                             </a>
                             <div class="result-channel">
