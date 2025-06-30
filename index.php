@@ -29,7 +29,7 @@ function formatDuration($seconds) {
 <body>
     <header class="header">
         <div class="header-left">
-            <a href="/ZouTube/home.php" class="logo">
+            <a href="/ZouTube/index.php" class="logo">
                 <svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
                     <rect width="30" height="20" fill="#FF0000" rx="5" />
                     <path d="M12 6L20 10L12 14V6Z" fill="white" />
@@ -68,7 +68,7 @@ function formatDuration($seconds) {
                     <?php foreach ($videos as $video): ?>
                         <?php if ($video['visibility'] !== 'public') continue; ?>
                         <div class="video-card" onclick="playVideo('<?= htmlspecialchars($video['filePath']) ?>')">
-                            <a href="/ZouTube/player.php?id=<?php echo $video['id']; ?>">
+                            <a href="/ZouTube/watch.php?id=<?php echo $video['id']; ?>">
                                 <div class="video-thumbnail">
                                     <?php if (!empty($video['thumbnailPath']) && file_exists($video['thumbnailPath'])): ?>
                                         <img src="<?= htmlspecialchars($video['thumbnailPath']) ?>" alt="Video Thumbnail" class="thumbnail-image">
@@ -90,8 +90,7 @@ function formatDuration($seconds) {
                                         <h3 class="video-title"><?= htmlspecialchars($video['title']) ?></h3>
                                         <div class="video-meta">
                                             <span class="channel-name">
-                                                <!-- Channel name -->
-                                                Tazkie
+                                                <?php echo htmlspecialchars($video['creator']); ?>
                                             </span>
                                         </div>
                                     </div>
