@@ -87,11 +87,6 @@ if (!$video) {
                                     <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>
                                 </svg>
                             </button>
-                            <button class="control-button" id="nextBtn">
-                                <svg viewBox="0 0 24 24" width="24" height="24">
-                                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path>
-                                </svg>
-                            </button>
                             <div class="time-display">
                                 <span id="currentTime">0:00</span>
                                 <span> / </span>
