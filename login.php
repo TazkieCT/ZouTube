@@ -46,6 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button class="visibility-toggle" type="submit" style="width: 100%;">Login</button>
             </form>
             <p style="margin-top: 12px;">Don't have an account? <a href="register.php">Register</a></p>
+            <div class="back-home-wrapper">
+                <a href="/ZouTube/index.php" class="back-home-button">Back to Home</a>
+            </div>
         </div>
     </div>
 </body>

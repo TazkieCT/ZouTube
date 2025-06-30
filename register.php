@@ -66,6 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
 
             <p style="margin-top: 12px;">Already have an account? <a href="login.php">Login</a></p>
+            <div class="back-home-wrapper">
+                <a href="/ZouTube/index.php" class="back-home-button">Back to Home</a>
+            </div>
         </div>
     </div>
 </body>
