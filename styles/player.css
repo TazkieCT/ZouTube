@@ -402,3 +402,41 @@ button {
         font-size: 18px;
     }
 }
+
+.channel-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.channel-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.channel-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 1px solid #ddd;
+}
+
+.channel-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.channel-subtext {
+    font-size: 13px;
+    color: #606060;
+}

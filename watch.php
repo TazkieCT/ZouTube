@@ -117,6 +117,14 @@ if (!$video) {
             </div>
             <div class="video-info">
                 <h1 class="video-title"><?php echo htmlspecialchars($video['title']); ?></h1>
+                <div class="channel-info">
+                    <!-- <a href="/ZouTube/search.php?query=<?php echo urlencode($video['creator']); ?>" class="channel-link"> -->
+                        <img src="/ZouTube/uploads/profile.png" alt="Channel Image" class="channel-avatar">
+                        <div class="channel-text">
+                            <h3 class="channel-name"><?php echo htmlspecialchars($video['creator']); ?></h3>
+                        </div>
+                    <!-- </a> -->
+                </div>
                 <div class="video-description">
                     <p>
                         <?php
@@ -130,6 +138,7 @@ if (!$video) {
                     </p>
                 </div>
             </div>
+
         </div>
 
         <div class="sidebar">
