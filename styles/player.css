@@ -285,10 +285,6 @@ button {
     font-weight: 500;
 }
 
-.hashtag:hover {
-    text-decoration: underline;
-}
-
 /* Sidebar */
 .sidebar {
     width: 400px;

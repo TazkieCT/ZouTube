@@ -268,10 +268,6 @@ body {
   overflow: hidden;
 }
 
-.result-title:hover {
-  color: #065fd4;
-}
-
 .result-channel {
   font-size: 15px;
   color: #606060;

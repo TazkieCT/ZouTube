@@ -107,7 +107,7 @@ if ($searchQuery) {
                             <span class="video-duration"><?= formatDuration($video['duration']) ?></span>
                         </div>
                         <div class="result-info">
-                            <a href="/watch.php?id=<?= $video['id'] ?>" class="result-title">
+                            <a href="/ZouTube/watch.php?id=<?= $video['id'] ?>" class="result-title">
                                 <?= htmlspecialchars($video['title']) ?>
                             </a>
                             <div class="result-channel">
