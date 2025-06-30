@@ -21,7 +21,14 @@ if (!$video) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZouTube Video Player</title>
+    <title>
+        <?php foreach ($videoData as $item): ?>
+                    <?php if ($item['visibility'] !== 'public') continue; ?>
+                    <?php if ($item['id'] === $video['id']): ?>
+                        <?php echo htmlspecialchars($item['title']); ?> - ZouTube
+                    <?php endif; ?>
+        <?php endforeach; ?>
+    </title>
     <link rel="stylesheet" href="/ZouTube/styles/player.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
 </head>

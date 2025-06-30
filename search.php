@@ -60,7 +60,7 @@ if ($searchQuery) {
                 <span></span>
                 <span></span>
             </button>
-            <a href="/ZouTube/home.php" class="logo">
+            <a href="/ZouTube/index.php" class="logo">
                 <svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
                     <rect width="30" height="20" fill="#FF0000" rx="5" />
                     <path d="M12 6L20 10L12 14V6Z" fill="white" />

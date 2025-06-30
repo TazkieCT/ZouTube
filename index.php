@@ -22,7 +22,7 @@ function formatDuration($seconds) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZouTube</title>
+    <title>Home</title>
     <link rel="stylesheet" href="/ZouTube/styles/home.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
 </head>
