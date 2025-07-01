@@ -84,18 +84,22 @@ function formatDuration($seconds) {
     </header>
 
     <div class="main-content">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <nav class="sidebar-nav">
                 <ul>
                     <li class="active">
                         <a href="/ZouTube/dashboard.php">
-                            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
+                            </svg>
                             <span>Content</span>
                         </a>
                     </li>
                     <li>
                         <a href="/ZouTube/upload.php">
-                            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"></path></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"></path>
+                            </svg>
                             <span>Upload Video</span>
                         </a>
                     </li>
